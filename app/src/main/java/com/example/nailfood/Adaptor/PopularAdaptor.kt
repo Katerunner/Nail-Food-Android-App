@@ -1,85 +1,57 @@
 package com.example.nailfood.Adaptor
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.nailfood.Domain.CategoryDomain
+import com.example.nailfood.Activity.ShowDetailActivity
+import com.example.nailfood.Domain.FoodDomain
 import com.example.nailfood.R
 
-class PopularAdaptor(private val categories: List<CategoryDomain>) :
+
+class PopularAdaptor(private val popularList: List<FoodDomain>) :
     RecyclerView.Adapter<PopularAdaptor.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val categoryName: TextView = itemView.findViewById(R.id.categoryTitle)
-        val categoryPic: ImageView = itemView.findViewById(R.id.categoryPicture)
-        val mainLayout: ConstraintLayout = itemView.findViewById(R.id.mainLayout)
+        val title: TextView = itemView.findViewById(R.id.titleFood)
+        val fee: TextView = itemView.findViewById(R.id.fee)
+        val pic: ImageView = itemView.findViewById(R.id.pic)
+        val addBtn: TextView = itemView.findViewById(R.id.addBtn)
+//        val mainLayout: ConstraintLayout = itemView.findViewById(R.id.mainLayout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflate =
-            LayoutInflater.from(parent.context).inflate(R.layout.viewholder_category, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.viewholder_popular, parent, false)
 
         return ViewHolder(inflate)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.categoryName.text = categories[position].title
-        val picURL: String
-        when (position) {
-            0 -> {
-                picURL = "cat_1"
-                holder.mainLayout.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.cat_background1
-                )
-            }
-            1 -> {
-                picURL = "cat_2"
-                holder.mainLayout.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.cat_background2
-                )
-            }
-            2 -> {
-                picURL = "cat_3"
-                holder.mainLayout.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.cat_background3
-                )
-            }
-            3 -> {
-                picURL = "cat_4"
-                holder.mainLayout.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.cat_background4
-                )
-            }
-            else -> {
-                picURL = "cat_5"
-                holder.mainLayout.background = ContextCompat.getDrawable(
-                    holder.itemView.context,
-                    R.drawable.cat_background5
-                )
-            }
-        }
+        holder.title.text = popularList[position].title
+        holder.fee.text = popularList[position].fee.toString()
 
         val drawableResourceId = holder.itemView.context.resources.getIdentifier(
-            picURL,
+            popularList[position].pic,
             "drawable",
             holder.itemView.context.packageName
         )
 
-        Glide.with(holder.itemView.context).load(drawableResourceId).into(holder.categoryPic)
+        Glide.with(holder.itemView.context).load(drawableResourceId).into(holder.pic)
 
+        holder.addBtn.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ShowDetailActivity::class.java)
+            intent.putExtra("object", popularList[position])
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
-        return categories.size
+        return popularList.size
     }
 }

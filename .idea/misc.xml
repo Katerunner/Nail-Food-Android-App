@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/NailFood/app/src/main/res/drawable/card_background.xml" value="0.1995" />
         <entry key="..\:/NailFood/app/src/main/res/drawable/cat_background.xml" value="0.232" />
         <entry key="..\:/NailFood/app/src/main/res/drawable/cat_background2.xml" value="0.232" />
         <entry key="..\:/NailFood/app/src/main/res/drawable/cat_background3.xml" value="0.232" />
@@ -11,10 +12,13 @@
         <entry key="..\:/NailFood/app/src/main/res/drawable/orange_button.xml" value="0.2585" />
         <entry key="..\:/NailFood/app/src/main/res/drawable/orangle_light_banner.xml" value="0.2585" />
         <entry key="..\:/NailFood/app/src/main/res/drawable/search_background.xml" value="0.2585" />
+        <entry key="..\:/NailFood/app/src/main/res/drawable/viewholder_popular.xml" value="0.1995" />
         <entry key="..\:/NailFood/app/src/main/res/layout/activity_intro.xml" value="0.1" />
         <entry key="..\:/NailFood/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/NailFood/app/src/main/res/layout/activity_main2.xml" value="0.14856557377049182" />
+        <entry key="..\:/NailFood/app/src/main/res/layout/activity_show_detail.xml" value="0.176" />
         <entry key="..\:/NailFood/app/src/main/res/layout/viewholder_category.xml" value="0.16486486486486487" />
+        <entry key="..\:/NailFood/app/src/main/res/layout/viewholder_popular.xml" value="0.536" />
       </map>
     </option>
   </component>

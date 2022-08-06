@@ -1,9 +1,11 @@
 package com.example.nailfood.Domain
 
+import java.io.Serializable
+
 class FoodDomain(
     val title: String,
     val pic: String,
     val description: String,
     val fee: Double,
-    val numberInCart: Int? = null
-)
+    var numberInCart: Int? = null
+) : Serializable
