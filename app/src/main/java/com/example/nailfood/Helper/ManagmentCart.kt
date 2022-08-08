@@ -3,6 +3,8 @@ package com.example.nailfood.Helper
 import android.content.Context
 import android.widget.Toast
 import com.example.nailfood.Domain.FoodDomain
+import com.example.nailfood.Interface.ChangeNumberItemsListener
+import java.time.Duration
 
 class ManagmentCart(private val context: Context) {
     private val tinyDB: TinyDB = TinyDB(context)
@@ -34,5 +36,38 @@ class ManagmentCart(private val context: Context) {
 
     fun getListCart(): ArrayList<FoodDomain> {
         return tinyDB.getListObject("CartList")
+    }
+
+    fun plusNumberFood(
+        listFood: ArrayList<FoodDomain>,
+        position: Int,
+        changeNumberItemsListener: ChangeNumberItemsListener
+    ) {
+        listFood[position].numberInCart = listFood[position].numberInCart!! + 1
+        tinyDB.putListObject("CartList", listFood)
+        changeNumberItemsListener.changed()
+    }
+
+    fun minusNumberFood(
+        listFood: ArrayList<FoodDomain>,
+        position: Int,
+        changeNumberItemsListener: ChangeNumberItemsListener
+    ) {
+        if (listFood[position].numberInCart == 1) {
+            listFood.removeAt(position)
+        } else {
+            listFood[position].numberInCart = listFood[position].numberInCart!! - 1
+        }
+        tinyDB.putListObject("CartList", listFood)
+        changeNumberItemsListener.changed()
+    }
+
+    fun getTotalFee(): Double {
+        val listFood: ArrayList<FoodDomain> = getListCart()
+        var fee: Double = 0.0
+        for (foodDomain in listFood) {
+            fee += foodDomain.fee * foodDomain.numberInCart!!
+        }
+        return fee
     }
 }

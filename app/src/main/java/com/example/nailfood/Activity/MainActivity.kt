@@ -1,6 +1,8 @@
 package com.example.nailfood.Activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nailfood.Adaptor.CategoryAdaptor
@@ -8,6 +10,7 @@ import com.example.nailfood.Adaptor.PopularAdaptor
 import com.example.nailfood.Domain.CategoryDomain
 import com.example.nailfood.Domain.FoodDomain
 import com.example.nailfood.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +20,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerViewCategory()
         recyclerViewPopular()
-//        invisible.visibility = View.GONE
+        bottomNavigation()
+    }
+
+    private fun bottomNavigation() {
+        val floatingActionButton: FloatingActionButton = findViewById(R.id.cartBtn)
+        val homeBtn: LinearLayout = findViewById(R.id.homeBtn)
+        floatingActionButton.setOnClickListener {
+            startActivity(Intent(this, CartListActivity::class.java))
+        }
+
+        homeBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
     private fun recyclerViewCategory() {
